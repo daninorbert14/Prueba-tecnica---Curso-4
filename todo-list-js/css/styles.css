@@ -1,0 +1,288 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+:root {
+    --ancho-max: 600px;
+    --alto-control: 36px;
+    --fondo-dinamico: radial-gradient(ellipse, orange, coral);
+    --borde-secciones: solid lightsalmon 2px;
+    --color-boton: firebrick;
+    --radio-borde: 20px;
+    --gap-seccion: 16px;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-size: 16px;
+    font-family: Helvetica, sans-serif;
+    background: radial-gradient(circle, white, orange);
+    /* Padding lateral para que los bloques no toquen el borde en móvil */
+    padding: 16px;
+    gap: 16px;
+}
+
+header {
+    text-align: center;
+}
+
+h1 {
+    font-size: clamp(1.8rem, 8vw, 3rem); /* fluido: grande en desktop, más pequeño en móvil */
+    color: peru;
+}
+
+.seccionForm {
+    display: flex;
+    flex-direction: column;       /* Mobile: apilado en columna */
+    align-items: center;
+    gap: 10px;
+    width: 100%;                  /* ocupa todo el ancho disponible en móvil */
+    border: var(--borde-secciones);
+    border-radius: var(--radio-borde);
+    background-color: white;
+    padding: 16px;
+}
+
+.seccionForm:hover {
+    background: var(--fondo-dinamico);
+    color: white;
+}
+
+.seccionForm label {
+    font-size: 1rem;
+    text-align: center;
+}
+
+.seccionForm input[type="text"] {
+    width: 100%;                  /* aprovecha todo el ancho en móvil */
+    height: var(--alto-control);
+    font-size: 1rem;
+    padding: 0 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.aniadir {
+    width: 50%;
+    height: var(--alto-control);
+    font-size: 0.95rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: rgb(208, 208, 208);
+    cursor: pointer;
+}
+
+.aniadir:hover {
+    color: white;
+    background-color: var(--color-boton);
+}
+
+.seccionLista {
+    width: 100%;
+    /* En móvil usamos altura relativa a la ventana para evitar doble scroll en landscape */
+    max-height: 45vh;
+    border: var(--borde-secciones);
+    border-radius: var(--radio-borde);
+    background-color: white;
+    padding: 16px;
+    overflow-y: auto; /* scroll si hay muchas tareas */
+}
+
+.seccionLista:hover {
+    background: var(--fondo-dinamico);
+    color: white;
+}
+
+.seccionLista h2 {
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 12px;
+}
+
+#listaTareas {
+    list-style: none;
+    width: 100%;                  /* ocupa todo el ancho, no solo el del contenido */
+}
+
+#listaTareas li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 4px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+}
+
+#listaTareas li:last-child {
+    border-bottom: none;
+}
+
+/* Span de tarea: ocupa el resto del ancho */
+#listaTareas li span {
+    flex: 1;
+    cursor: pointer;
+    transition: text-decoration 0.2s, color 0.2s;
+}
+
+/* Checkbox personalizado */
+input[type="checkbox"] {
+    /* Ocultamos el checkbox nativo para reemplazarlo */
+    appearance: none;
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    min-width: 18px;              /* evita que se encoja */
+    border: 2px solid lightsalmon;
+    border-radius: 4px;
+    background-color: white;
+    cursor: pointer;
+    position: relative;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+/* Tick (✓) cuando está marcado */
+input[type="checkbox"]:checked::after {
+    content: "";
+    position: absolute;
+    left: 3px;
+    top: 0px;
+    width: 5px;
+    height: 10px;
+    border: 2px solid white;
+    border-top: none;
+    border-left: none;
+    transform: rotate(45deg);
+}
+
+/* Estilos que utiliza app.js si se marca una tarea como completada */
+.completado input[type="checkbox"] {
+    background-color: firebrick;
+    border-color: firebrick;
+}
+.completado span {
+    text-decoration: line-through;
+    color: #999;
+}
+
+/* Estilos para el botón de eliminar tarea seleccionada */
+.botonEliminarTarea {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0;
+}
+
+.seccionEliminar {
+    display: flex;
+    flex-direction: column;       /* Mobile: apilados en columna */
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    border: var(--borde-secciones);
+    border-radius: var(--radio-borde);
+    background-color: white;
+    padding: 16px;
+}
+
+.seccionEliminar:hover{
+    background: var(--fondo-dinamico);
+}
+
+.eliminar {
+    width: 100%;                  /* ancho completo en móvil */
+    height: var(--alto-control);
+    font-size: 0.9rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: rgb(208, 208, 208);
+    cursor: pointer;
+}
+
+.eliminar:hover {
+    color: white;
+    background-color: var(--color-boton);
+}
+
+/* Portrait: en pantalla de móvil en vertical, una sola columna */
+@media (min-width: 600px) {
+    body {
+        padding: 20px;
+        gap: 0;                   /* los márgenes se gestionan con margin en cada bloque */
+    }
+
+    h1 {
+        margin-bottom: 10px;
+    }
+
+    /* Form en fila horizontal */
+    .seccionForm {
+        flex-direction: row;
+        justify-content: center;
+        width: var(--ancho-max);
+        height: 75px;
+        margin: 20px auto;
+        padding: 10px 20px;
+    }
+
+    .seccionForm label {
+        white-space: nowrap;
+        text-align: right;
+    }
+
+    .seccionForm input[type="text"] {
+        width: auto;
+        flex: 1;                  /* ocupa el espacio restante entre span y botón */
+    }
+
+    .aniadir {
+        width: 80px;
+    }
+
+    /* Lista con altura fija en desktop */
+    .seccionLista {
+        width: var(--ancho-max);
+        max-height: 300px;
+        margin: 20px auto;
+    }
+
+    .seccionLista h2 {
+        font-size: 1rem;
+    }
+
+    /* Footer en fila horizontal */
+    .seccionEliminar {
+        flex-direction: row;
+        justify-content: space-around;
+        width: var(--ancho-max);
+        height: 75px;
+        margin: 20px auto;
+    }
+
+    .eliminar {
+        width: 200px;
+    }
+}
+/*  Landscape: en pantalla de móvil en horizontal, una sola columna 
+    Evita el doble scroll: la lista no tiene altura fija,
+    se usa el scroll de la página completa. */
+@media (max-height: 500px) {
+    .seccionForm {
+        flex-direction: row;
+        height: auto;
+        padding: 8px 16px;
+    }
+
+    /* En landscape, la lista NO tiene scroll propio para evitar doble scroll.
+       Se deja crecer y la página entera hace scroll. */
+    .seccionLista {
+        max-height: none;
+        overflow-y: visible;
+    }
+}

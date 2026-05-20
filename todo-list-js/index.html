@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+        <title>To-Do List</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📝</text></svg>">
+        <link rel="stylesheet" href="css/styles.css">
+    </head>
+    <body>
+            <header>
+                <h1>To-Do List</h1>
+            </header>
+            <section class="seccionForm">
+                <label for="nuevaTarea">Introduce tu nueva tarea: </label>
+                <input type="text" name="nuevaTarea" id="nuevaTarea" placeholder="Escribe aquí">
+                <button class="aniadir" id="aniadir" type="button">Añadir</button>
+            </section>
+            <main class="seccionLista">
+                <h2>Lista de tareas:</h2>
+                <ul id="listaTareas"></ul>
+            </main>
+            <footer class="seccionEliminar">
+                <button class="eliminar" id="eliminarCompletadas">Eliminar tareas completadas</button>
+                <button class="eliminar" id="eliminarTodas">Eliminar todas las tareas</button>
+            </footer>
+
+            <script src="js/app.js"></script>
+    </body>
+</html>
